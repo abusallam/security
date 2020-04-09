@@ -8,9 +8,9 @@ Restart=always
 User=root
 Group=docker
 PermissionsStartOnly=true
+ExecStartPre=/bin/bash /opt/mistborn_volumes/extra/raspap/etc-raspap/hostapd/servicestart.sh --interface uap0 --seconds 3
 # Shutdown container (if running) when unit is stopped
 ExecStartPre=/usr/local/bin/docker-compose -f /opt/mistborn/extra/raspap.yml down
-ExecStartPre=/bin/bash /opt/mistborn_volumes/extra/raspap/etc-raspap/hostapd/servicestart.sh --interface uap0 --seconds 3
 
 # Start container when unit is started
 ExecStart=/usr/local/bin/docker-compose -f /opt/mistborn/extra/raspap.yml up --build

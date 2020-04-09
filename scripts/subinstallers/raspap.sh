@@ -40,15 +40,15 @@ sudo cp $TMP_DIR/config/dhcpcd.conf /etc/dhcpcd.conf
 #sudo cp config/config.php /var/www/html/includes/
 
 # systemd-networkd
-sudo systemctl stop systemd-networkd
-sudo systemctl disable systemd-networkd
+sudo systemctl stop systemd-networkd || true
+sudo systemctl disable systemd-networkd || true
 sudo cp $TMP_DIR/config/raspap-bridge-br0.netdev /etc/systemd/network/raspap-bridge-br0.netdev
 sudo cp $TMP_DIR/config/raspap-br0-member-eth0.network /etc/systemd/network/raspap-br0-member-eth0.network 
 
-# enable packet forwarding
-echo "net.ipv4.ip_forward=1" | sudo tee /etc/sysctl.d/90_raspap.conf > /dev/null
-sudo sysctl -p /etc/sysctl.d/90_raspap.conf
-sudo /etc/init.d/procps restart
+## enable packet forwarding
+#echo "net.ipv4.ip_forward=1" | sudo tee /etc/sysctl.d/90_raspap.conf > /dev/null
+#sudo sysctl -p /etc/sysctl.d/90_raspap.conf
+#sudo /etc/init.d/procps restart
 
 ## iptables
 #sudo iptables -t nat -A POSTROUTING -j MASQUERADE
