@@ -9,7 +9,11 @@ services:
       - "traefik.port=80"
     #env_file:
     #  - ../.envs/.production/.pihole
-    command: /start
+    #command: /start
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      #- SYS_ADMIN
     volumes:
       - ../../mistborn_volumes/extra/raspap/etc-raspap:/etc/raspap
     restart: unless-stopped
