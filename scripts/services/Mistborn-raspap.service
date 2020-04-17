@@ -8,6 +8,7 @@ Restart=always
 User=root
 Group=docker
 PermissionsStartOnly=true
+ExecStartPre=/sbin/iptables -I DOCKER-USER -i DIFACE -p tcp --dport 8095 -j MISTBORN_LOG_DROP
 ExecStartPre=/bin/bash /opt/mistborn_volumes/extra/raspap/etc-raspap/hostapd/servicestart.sh --interface uap0 --seconds 3
 # Shutdown container (if running) when unit is stopped
 ExecStartPre=/usr/local/bin/docker-compose -f /opt/mistborn/extra/raspap.yml down
@@ -16,6 +17,7 @@ ExecStartPre=/usr/local/bin/docker-compose -f /opt/mistborn/extra/raspap.yml dow
 ExecStart=/usr/local/bin/docker-compose -f /opt/mistborn/extra/raspap.yml up --build
 # Stop container when unit is stopped
 ExecStop=/usr/local/bin/docker-compose -f /opt/mistborn/extra/raspap.yml down
+ExecStopPost=-/sbin/iptables -D DOCKER-USER -i DIFACE -p tcp --dport 8095 -j MISTBORN_LOG_DROP
 # Post stop
 
 [Install]
