@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RASPAP_VOL=/opt/mistborn_volumes/raspap/etc-raspap
+RASPAP_VOL=/opt/mistborn_volumes/extra/raspap/etc-raspap
 TMP_DIR=/tmp/mistborn-raspap
 
 # install on gateway
