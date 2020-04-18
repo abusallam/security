@@ -12,10 +12,12 @@ services:
     #command: /start
     network_mode: host
     cap_add:
-      - NET_ADMIN
+      #- NET_ADMIN
       #- SYS_ADMIN
+      - CAP_FOWNER
     volumes:
       - ../../mistborn_volumes/extra/raspap/etc-raspap:/etc/raspap
+      - /sys:/sys
     restart: unless-stopped
 
 networks:
